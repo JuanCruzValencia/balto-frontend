@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { LoginInputTypes } from "./types";
+import { signIn } from "next-auth/react";
 
 const LoginComponent: React.FC = () => {
   const {
@@ -11,6 +12,7 @@ const LoginComponent: React.FC = () => {
 
   const onSubmit: SubmitHandler<LoginInputTypes> = (data) => {
     console.log(data);
+    signIn("credentials-login", { ...data });
   };
 
   return (

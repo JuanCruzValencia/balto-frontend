@@ -1,22 +1,21 @@
 import { Product } from "@/interfaces";
 import { GetServerSideProps, NextPage } from "next";
-import Head from "next/head";
-import ProductsComponent from "@/components/products/Products";
-import { ServerRest } from "@/utils/backend/server-rest";
 import { getServerSession } from "next-auth";
+import Head from "next/head";
+import { ServerRest } from "@/utils/backend/server-rest";
 import { authOptions } from "../api/auth/[...nextAuth]";
 
 interface PageProps {
-  products: Product[];
+  product: Product;
 }
 
-const Products: NextPage<PageProps> = ({ products }) => {
+const Product: NextPage<PageProps> = ({ product }) => {
   return (
     <>
       <Head>
-        <title>Balto | Products</title>
+        <title>Balto | Product Detail</title>
       </Head>
-      <ProductsComponent products={products} />
+      {product}
     </>
   );
 };
@@ -25,15 +24,21 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
 
   if (session && session.user) {
-    const { data: products } = await ServerRest.get("/products", {
-      headers: { Authorization: `Bearer ${session.user.token}` },
-    });
+    const { data: product } = await ServerRest.get<Product>(
+      `/products/${context.params!.pid}`,
+      {
+        headers: {
+          Authorization: `Bearer ${session.user.token}`,
+        },
+      }
+    );
     return {
       props: {
-        products: products.data,
+        product: product,
       },
     };
   }
+
   return {
     redirect: {
       destination: "/",
@@ -42,4 +47,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default Products;
+export default Product;

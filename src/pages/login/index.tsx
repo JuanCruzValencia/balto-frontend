@@ -1,8 +1,11 @@
 import LoginComponent from "@/components/login/Login";
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
+import { getServerSession } from "next-auth";
 import Head from "next/head";
+import { authOptions } from "../api/auth/[...nextAuth]";
 
 interface PageProps {}
+
 const Login: NextPage = ({}: PageProps) => {
   return (
     <>
@@ -12,6 +15,22 @@ const Login: NextPage = ({}: PageProps) => {
       <LoginComponent />
     </>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
 };
 
 export default Login;
