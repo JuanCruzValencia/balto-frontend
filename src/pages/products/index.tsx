@@ -4,7 +4,7 @@ import Head from "next/head";
 import ProductsComponent from "@/components/products/Products";
 import { ServerRest } from "@/utils/backend/server-rest";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextAuth]";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 interface PageProps {
   products: Product[];

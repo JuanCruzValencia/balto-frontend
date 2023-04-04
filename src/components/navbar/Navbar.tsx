@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { BsBag, BsSearch } from "react-icons/bs";
-import { BiUser } from "react-icons/bi";
 import { CgMenuRight } from "react-icons/cg";
+import LoginIcon from "./LoginIcon";
 
 const Navbar = () => {
   return (
@@ -15,9 +15,7 @@ const Navbar = () => {
         <div>
           <BsSearch />
         </div>
-        <Link className="capitalize flex items-center gap-2" href={"/login"}>
-          <BiUser /> log in
-        </Link>
+        <LoginIcon />
         <div className="bg-green p-2 rounded-full">
           <Link href={"/login"}>
             <BsBag />

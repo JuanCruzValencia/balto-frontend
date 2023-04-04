@@ -17,7 +17,11 @@ export const authOptions: AuthOptions = {
           username: credentials?.email,
           password: credentials?.password,
         });
+
+        console.log(response);
+
         const accesToken = response.data.token;
+
         if (accesToken) {
           const { data: user } = await ServerRest.get<User>("/current", {
             headers: { Authorization: `Bearer ${accesToken}` },
@@ -43,6 +47,8 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
+      console.log(user);
+
       if (user) {
         token.role = user.role;
         token.accesToken = user.token;
@@ -50,10 +56,12 @@ export const authOptions: AuthOptions = {
 
       return token;
     },
-    async session({ token, session }) {
+    async session({ session, token }) {
+      console.log(session);
+
       if (session.user && token) {
         session.user.role = token.role;
-        session.user.token = token.accesToken;
+        session.user.token = token.accessToken;
       }
 
       return session;

@@ -3,7 +3,7 @@ import { GetServerSideProps, NextPage } from "next";
 import { getServerSession } from "next-auth";
 import Head from "next/head";
 import { ServerRest } from "@/utils/backend/server-rest";
-import { authOptions } from "../api/auth/[...nextAuth]";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 interface PageProps {
   product: Product;
