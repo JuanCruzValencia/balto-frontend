@@ -1,6 +1,6 @@
 import { User } from "@/interfaces";
 import { ServerRest } from "@/utils/backend/server-rest";
-import { AxiosError, AxiosResponse } from "axios";
+import { AxiosError } from "axios";
 import nextAuth, { AuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
@@ -25,8 +25,6 @@ export const authOptions: AuthOptions = {
 
         if (!response) return null;
 
-        console.log(`axios user`, response.data);
-
         const accesToken = response.data.accessToken;
 
         if (accesToken) {
@@ -40,6 +38,7 @@ export const authOptions: AuthOptions = {
             id: user._id.toString(),
             role: user.role,
             token: accesToken,
+            cart: user.cart,
           };
         } else {
           return null;
@@ -56,21 +55,21 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      console.log(`jwtCallback user`, user);
-
       if (user) {
+        token.id = user.id;
         token.role = user.role;
-        token.accesToken = user.accessToken;
+        token.token = user.token;
+        token.cart = user.cart;
       }
 
       return token;
     },
     async session({ session, token }) {
-      console.log(`session user`, session);
-
       if (session.user && token) {
+        session.user._id = token.id;
         session.user.role = token.role;
-        session.user.accessToken = token.accessToken;
+        session.user.token = token.token;
+        session.user.cart = token.cart;
       }
 
       return session;
