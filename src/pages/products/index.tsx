@@ -24,9 +24,11 @@ const Products: NextPage<PageProps> = ({ products }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
 
+  console.log(`login component session ${session}`);
+
   if (session && session.user) {
     const { data: products } = await ServerRest.get("/products", {
-      headers: { Authorization: `Bearer ${session.user.token}` },
+      headers: { Authorization: `Bearer ${session.user.accessToken}` },
     });
     return {
       props: {
