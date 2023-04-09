@@ -29,7 +29,7 @@ export interface Product {
   status: boolean;
   stock: number;
   category: string;
-  thumbnails: string[];
+  thumbnail: string[];
   owner: ROLE | User["_id"];
 }
 

@@ -4,7 +4,7 @@ import { ServerRest } from "@/utils/backend/server-rest";
 import { GetServerSideProps, NextPage } from "next";
 import { getServerSession } from "next-auth";
 import Head from "next/head";
-import { authOptions } from "./api/auth/[...nextAuth]";
+import { authOptions } from "./api/auth/[...nextauth]";
 
 interface PageProps {
   products: Product[];
@@ -20,6 +20,10 @@ const Home: NextPage<PageProps> = ({ products }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
+        <div className="flex items-center justify-center gap-2">
+          <div className="w-[30px] h-[1px] bg-black"></div>
+          <h2>Our Products</h2>
+        </div>
         <ProductsComponent products={products} />
       </main>
     </>

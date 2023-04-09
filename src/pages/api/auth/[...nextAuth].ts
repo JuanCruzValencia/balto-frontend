@@ -1,4 +1,3 @@
-import { User } from "@/interfaces";
 import { ServerRest } from "@/utils/backend/server-rest";
 import { AxiosError } from "axios";
 import nextAuth, { AuthOptions } from "next-auth";

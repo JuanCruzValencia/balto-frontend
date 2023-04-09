@@ -8,10 +8,11 @@ type Props = {
 const ProductsComponent: React.FC<Props> = ({ products }) => {
   return (
     <>
-      <h1>PRODUCTS</h1>
-      {products.map((product) => (
-        <ProductCard product={product} key={product._id} />
-      ))}
+      <div className="flex flex-wrap justify-center items-center gap-7">
+        {products.map((product) => (
+          <ProductCard product={product} key={product._id} />
+        ))}
+      </div>
     </>
   );
 };
