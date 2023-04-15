@@ -1,28 +1,22 @@
-import Head from "next/head";
+import { Cart } from "@/interfaces";
 import { GetServerSideProps, NextPage } from "next";
 import { getServerSession } from "next-auth";
-import { Product } from "@/interfaces";
+import Head from "next/head";
 import { ServerRest } from "@/utils/backend/server-rest";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import ProductDetailCard from "@/components/products/ProductDetailCard";
+import { authOptions } from "../api/auth/[...nextauth]";
+import CartFlexContainer from "@/components/carts/CartFlexContainer";
 
 interface PageProps {
-  product: Product;
+  cart: Cart;
 }
 
-type ResponsePayload = {
-  payload: Product;
-};
-
-const ProductDetailPage: NextPage<PageProps> = ({ product }) => {
+const CartPage: NextPage<PageProps> = ({ cart }) => {
   return (
     <>
       <Head>
         <title>Balto | Product Detail</title>
       </Head>
-      <main>
-        <ProductDetailCard product={product} />
-      </main>
+      <CartFlexContainer cart={cart} />
     </>
   );
 };
@@ -31,8 +25,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
 
   if (session && session.user) {
-    const { data: product } = await ServerRest.get<ResponsePayload>(
-      `/api/products/${context.params!.pid}`,
+    const { data: cart } = await ServerRest.get<Cart>(
+      `/products/${context.params!.cid}`,
       {
         headers: {
           Authorization: `Bearer ${session.user.token}`,
@@ -41,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     );
     return {
       props: {
-        product: product.payload,
+        cart: cart,
       },
     };
   }
@@ -54,4 +48,4 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   };
 };
 
-export default ProductDetailPage;
+export default CartPage;

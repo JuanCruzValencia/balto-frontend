@@ -12,16 +12,15 @@ const Login: NextPage = ({}: PageProps) => {
       <Head>
         <title>Balto | Login</title>
       </Head>
-      <LoginComponent />
+      <main>
+        <LoginComponent />
+      </main>
     </>
   );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
-
-  console.log('session from login component', session);
-  
 
   if (session) {
     return {

@@ -2,6 +2,9 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    fontFamily: {
+      sans: ["Montserrat", "sans-serif"],
+    },
     colors: {
       black: "#000000",
       main: "#E9FFFF",
@@ -17,9 +20,6 @@ module.exports = {
       m: "22px",
       l: "36px",
       xl: "48px",
-    },
-    fontFamily: {
-      sans: ["Tauri", "sans-serif"],
     },
     extend: {},
   },

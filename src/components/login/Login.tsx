@@ -11,7 +11,6 @@ const LoginComponent: React.FC = () => {
   } = useForm<LoginInputTypes>();
 
   const onSubmit: SubmitHandler<LoginInputTypes> = (data) => {
-    console.log(data);
     signIn("credentials-login", { ...data });
   };
 

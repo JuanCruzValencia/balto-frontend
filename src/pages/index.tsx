@@ -1,14 +1,18 @@
-import ProductsComponent from "@/components/products/Products";
-import { Product } from "@/interfaces";
-import { ServerRest } from "@/utils/backend/server-rest";
+import Head from "next/head";
 import { GetServerSideProps, NextPage } from "next";
 import { getServerSession } from "next-auth";
-import Head from "next/head";
+import { Product } from "@/interfaces";
 import { authOptions } from "./api/auth/[...nextauth]";
+import { ServerRest } from "@/utils/backend/server-rest";
+import ProductsFlexComponent from "@/components/products/ProductsFlexComponent";
 
 interface PageProps {
   products: Product[];
 }
+
+type ResponsePayload = {
+  payload: Product[];
+};
 
 const Home: NextPage<PageProps> = ({ products }) => {
   return (
@@ -24,7 +28,7 @@ const Home: NextPage<PageProps> = ({ products }) => {
           <div className="w-[30px] h-[1px] bg-black"></div>
           <h2>Our Products</h2>
         </div>
-        <ProductsComponent products={products} />
+        <ProductsFlexComponent products={products} />
       </main>
     </>
   );
@@ -34,11 +38,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
 
   if (session && session.user) {
-    const { data: products } = await ServerRest.get("/api/products", {
-      headers: { Authorization: `Bearer ${session.user.token}` },
-    });
-
-    console.log("products on client", products);
+    const { data: products } = await ServerRest.get<ResponsePayload>(
+      "/api/products",
+      {
+        headers: { Authorization: `Bearer ${session.user.token}` },
+      }
+    );
 
     return {
       props: {

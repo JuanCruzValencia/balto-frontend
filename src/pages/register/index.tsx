@@ -9,7 +9,9 @@ const Register: NextPage = ({}: PageProps) => {
       <Head>
         <title>Balto | Register</title>
       </Head>
-      <RegisterComponent />
+      <main>
+        <RegisterComponent />
+      </main>
     </>
   );
 };

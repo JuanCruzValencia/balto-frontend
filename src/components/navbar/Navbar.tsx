@@ -17,7 +17,7 @@ const Navbar = () => {
         </div>
         <LoginIcon />
         <div className="bg-green p-2 rounded-full">
-          <Link href={"/login"}>
+          <Link href={"/cart"}>
             <BsBag />
           </Link>
         </div>
