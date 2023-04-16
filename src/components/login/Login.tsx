@@ -15,11 +15,11 @@ const LoginComponent: React.FC = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-between gap-10 bg-green h-[500px] w-full max-w-[400px] rounded p-6 font-bold">
+    <div className="flex flex-col items-center justify-between gap-10 bg-green h-[500px] w-[400px] rounded p-6 font-bold">
       <h2 className="text-l">Bienvenido!</h2>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center justify-between h-full max-h-[400px] w-full max-w-[300px] gap-10"
+        className="flex flex-col items-center justify-between h-full w-full max-w-[310px] gap-10"
       >
         <div className="flex flex-col gap-10 h-full w-full">
           <input

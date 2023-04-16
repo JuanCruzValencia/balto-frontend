@@ -1,8 +1,8 @@
-import LoginComponent from "@/components/login/Login";
+import Head from "next/head";
 import { GetServerSideProps, NextPage } from "next";
 import { getServerSession } from "next-auth";
-import Head from "next/head";
-import { authOptions } from "../api/auth/[...nextauth]";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import LoginComponent from "@/components/login/Login";
 
 interface PageProps {}
 

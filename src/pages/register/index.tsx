@@ -1,6 +1,6 @@
-import RegisterComponent from "@/components/register/Register";
-import { NextPage } from "next";
 import Head from "next/head";
+import { NextPage } from "next";
+import RegisterComponent from "@/components/register/Register";
 
 interface PageProps {}
 const Register: NextPage = ({}: PageProps) => {
