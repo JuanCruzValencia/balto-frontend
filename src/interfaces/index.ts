@@ -37,3 +37,9 @@ export interface Products {
   product: Product["_id"];
   quantity: number;
 }
+
+export interface CartContextProps {
+  getCartList: (cid: Cart["_id"]) => Cart["products"][];
+  addToCart: (cid: Cart["_id"], pid: Product["_id"]) => void;
+  deleteItem: (cid: Cart["_id"], pid: Product["_id"]) => void;
+}

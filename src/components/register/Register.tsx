@@ -23,8 +23,6 @@ const RegisterComponent = () => {
       router.push("/login");
     }
 
-    console.log(response);
-
     return response.data;
   };
 
