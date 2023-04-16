@@ -5,6 +5,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+  const token = req.headers.authorization;
+
   switch (req.method) {
     case "POST":
       try {
@@ -12,7 +14,12 @@ export default async function handler(
 
         const { data } = await ServerRest.post(
           `/api/carts/${cid}/product/${pid}`,
-          { ...req.body }
+          { ...req.body },
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
         );
 
         return res.status(200).send(data);
@@ -29,7 +36,11 @@ export default async function handler(
 
         const { data } = await ServerRest.delete(
           `/api/carts/${cid}/product/${pid}`,
-          { ...req.body }
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
         );
 
         return res.status(200).send(data);

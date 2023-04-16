@@ -10,6 +10,10 @@ interface PageProps {
   cart: Cart;
 }
 
+type CartResponse = {
+  payload: Cart;
+};
+
 const CartPage: NextPage<PageProps> = ({ cart }) => {
   return (
     <>
@@ -25,8 +29,8 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
 
   if (session && session.user) {
-    const { data: cart } = await ServerRest.get<Cart>(
-      `/products/${context.params!.cid}`,
+    const { data: cart } = await ServerRest.get<CartResponse>(
+      `/api/carts/${context.params!.cid}`,
       {
         headers: {
           Authorization: `Bearer ${session.user.token}`,
@@ -35,7 +39,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     );
     return {
       props: {
-        cart: cart,
+        cart: cart.payload,
       },
     };
   }

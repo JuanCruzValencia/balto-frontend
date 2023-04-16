@@ -17,7 +17,7 @@ export enum ROLE {
 
 export interface Cart {
   _id: string;
-  products: Products;
+  products: Products[];
 }
 
 export interface Product {
@@ -39,7 +39,7 @@ export interface Products {
 }
 
 export interface CartContextProps {
-  getCartList: (cid: Cart["_id"]) => Cart["products"][];
-  addToCart: (cid: Cart["_id"], pid: Product["_id"]) => void;
-  deleteItem: (cid: Cart["_id"], pid: Product["_id"]) => void;
+  getCartList: () => Cart["products"][];
+  addToCart: (pid: Product["_id"]) => void;
+  deleteItem: (pid: Product["_id"]) => void;
 }

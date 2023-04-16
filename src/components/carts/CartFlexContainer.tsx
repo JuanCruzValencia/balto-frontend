@@ -8,6 +8,7 @@ const CartFlexContainer: React.FC<Props> = ({ cart }) => {
   return (
     <>
       <h1>Cart Container</h1>
+      {JSON.stringify(cart)}
     </>
   );
 };

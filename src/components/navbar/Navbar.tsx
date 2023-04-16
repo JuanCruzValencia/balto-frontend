@@ -2,8 +2,11 @@ import Link from "next/link";
 import { BsBag, BsSearch } from "react-icons/bs";
 import { CgMenuRight } from "react-icons/cg";
 import LoginIcon from "./LoginIcon";
+import { useSession } from "next-auth/react";
 
 const Navbar = () => {
+  const { data: session } = useSession();
+
   return (
     <div className="flex flex-col md:flex-row items-center justify-between w-full px-[200px] p-4 bg-main">
       <div>
@@ -17,7 +20,7 @@ const Navbar = () => {
         </div>
         <LoginIcon />
         <div className="bg-green p-2 rounded-full">
-          <Link href={"/cart"}>
+          <Link href={`/carts/${session?.user?.cart}`}>
             <BsBag />
           </Link>
         </div>
