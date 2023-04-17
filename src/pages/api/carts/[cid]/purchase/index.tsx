@@ -10,32 +10,11 @@ export default async function handler(
   switch (req.method) {
     case "POST":
       try {
-        const { cid, pid } = req.query;
+        const { cid } = req.query;
 
         const { data } = await ServerRest.post(
-          `/api/carts/${cid}/product/${pid}`,
-          { ...req.body },
-          {
-            headers: {
-              Authorization: token,
-            },
-          }
-        );
-
-        return res.status(200).send(data);
-      } catch (error: any) {
-        if (error?.response?.status === 404) {
-          return res.status(404).end();
-        }
-      }
-      break;
-
-    case "DELETE":
-      try {
-        const { cid, pid } = req.query;
-
-        const { data } = await ServerRest.delete(
-          `/api/carts/${cid}/product/${pid}`,
+          `/api/carts/${cid}/purchase`,
+          {},
           {
             headers: {
               Authorization: token,
@@ -52,7 +31,7 @@ export default async function handler(
       break;
 
     default:
-      res.setHeader("Allow", ["POST", "DELETE"]);
+      res.setHeader("Allow", ["POST"]);
       res.status(405).end(`Method ${req.method} Not Allowed`);
       break;
   }

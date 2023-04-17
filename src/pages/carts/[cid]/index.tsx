@@ -3,8 +3,8 @@ import { GetServerSideProps, NextPage } from "next";
 import { getServerSession } from "next-auth";
 import Head from "next/head";
 import { ServerRest } from "@/utils/backend/server-rest";
-import { authOptions } from "../api/auth/[...nextauth]";
 import CartFlexContainer from "@/components/carts/CartFlexContainer";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 interface PageProps {
   cart: Cart;

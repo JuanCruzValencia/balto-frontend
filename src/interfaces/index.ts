@@ -39,7 +39,8 @@ export interface Products {
 }
 
 export interface CartContextProps {
-  getCartList: () => Cart["products"][];
+  getCartList: () => Cart["products"];
   addToCart: (pid: Product["_id"]) => void;
   deleteItem: (pid: Product["_id"]) => void;
+  purchaseCart: () => void;
 }

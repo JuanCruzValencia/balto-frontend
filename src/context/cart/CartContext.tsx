@@ -17,7 +17,11 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
 
   //TODO logica para que cuando inicio sesion me traiga los datos del carrito de la DB
   const getCartList = async (cid: Cart["_id"]) => {
-    const response = await BrowserRest.get<Cart["products"][]>(`/carts/${cid}`);
+    const response = await BrowserRest.get<Cart["products"]>(`/carts/${cid}`, {
+      headers: {
+        Authorization: `Bearer ${session?.user?.token}`,
+      },
+    });
 
     return response.data;
   };
@@ -53,10 +57,25 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
     return response.data;
   };
 
+  const purchaseCart = async () => {
+    const response = await BrowserRest.post(
+      `/carts/${userCartId}/purchase`,
+      {},
+      {
+        headers: {
+          Authorization: `Bearer ${session?.user?.token}`,
+        },
+      }
+    );
+
+    return response.data;
+  };
+
   const data = {
     getCartList,
     addToCart,
     deleteItem,
+    purchaseCart,
   };
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>;

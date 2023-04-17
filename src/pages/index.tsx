@@ -5,6 +5,7 @@ import { Product } from "@/interfaces";
 import { authOptions } from "./api/auth/[...nextauth]";
 import { ServerRest } from "@/utils/backend/server-rest";
 import ProductsFlexComponent from "@/components/products/ProductsFlexComponent";
+import HeroComponent from "@/components/hero/HeroComponent";
 
 interface PageProps {
   products: Product[];
@@ -24,10 +25,7 @@ const Home: NextPage<PageProps> = ({ products }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div className="flex items-center justify-center gap-2">
-          <div className="w-[30px] h-[1px] bg-black"></div>
-          <h2>Our Products</h2>
-        </div>
+        <HeroComponent />
         <ProductsFlexComponent products={products} />
       </main>
     </>
