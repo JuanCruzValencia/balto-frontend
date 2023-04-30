@@ -34,7 +34,7 @@ export interface Product {
 }
 
 export interface Products {
-  product: Product["_id"];
+  product: Product;
   quantity: number;
 }
 

@@ -54,6 +54,8 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
       }
     );
 
+    console.log(response.data);
+
     return response.data;
   };
 

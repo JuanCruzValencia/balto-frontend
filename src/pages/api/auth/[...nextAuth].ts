@@ -31,7 +31,7 @@ export const authOptions: AuthOptions = {
             headers: { Authorization: `Bearer ${accesToken}` },
           });
 
-          const user = data._doc;
+          const user = data;
 
           return {
             id: user._id.toString(),

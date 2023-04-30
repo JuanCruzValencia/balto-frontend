@@ -13,6 +13,7 @@ module.exports = {
       text: "#777777",
       white: "#ffffff",
       footer: "#008080",
+      red: "#d64045",
     },
     fontSize: {
       xs: "14px",
