@@ -1,3 +1,5 @@
+import { type } from "os";
+
 export interface User {
   _id: string;
   firstName: string;
@@ -43,4 +45,8 @@ export interface CartContextProps {
   addToCart: (pid: Product["_id"]) => void;
   deleteItem: (pid: Product["_id"]) => void;
   purchaseCart: () => void;
+}
+
+export type RestoreInputTypes = {
+  email: User["email"];
 }

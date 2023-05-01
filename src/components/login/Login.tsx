@@ -51,6 +51,12 @@ const LoginComponent: React.FC = () => {
             AQUI
           </Link>
         </span>
+        <span className="text-text">
+          Olvidaste tu password
+          <Link href={"/restore"} className="underline text-font font-bold">
+            Click Aqui
+          </Link>
+        </span>
       </div>
     </div>
   );

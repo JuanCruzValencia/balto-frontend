@@ -31,9 +31,9 @@ const ProductDetailCard: React.FC<Props> = ({ product }) => {
           <h2 className="text-l font-bold">{product.title}</h2>
           <RatingComponent rating={5} />
           <span className="text-m font-bold">$ {product.price}</span>
-          <ProductsQuantity initialValue={1} onAdd={onAdd}/>
+          <ProductsQuantity initialValue={1} onAdd={onAdd} />
           <div>
-            <AddToCartButton />
+            <AddToCartButton pid={product._id} />
             <AddToFavButton />
           </div>
           <p>{product.description}</p>
