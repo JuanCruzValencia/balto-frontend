@@ -3,7 +3,7 @@ import { NextPage } from "next";
 import RegisterComponent from "@/components/register/Register";
 
 interface PageProps {}
-const Register: NextPage = ({}: PageProps) => {
+const Register: NextPage<PageProps> = ({}) => {
   return (
     <>
       <Head>

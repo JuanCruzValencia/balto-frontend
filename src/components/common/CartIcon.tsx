@@ -7,18 +7,18 @@ import { CartContextProps } from "@/interfaces";
 
 const CartIcon: React.FC = () => {
   const { getCartList } = useContext(CartContext) as CartContextProps;
-  const [cartLength, setCartLength] = useState<number>(0);
-  const isCancelled = useRef<boolean>(false);
+  const [cartList, setCartList] = useState<number>();
   const { data: session } = useSession();
 
   useEffect(() => {
-    if (!isCancelled) {
-      setCartLength(getCartList().length);
-    }
+    async function responseCart() {
+      const cartResponse = await getCartList();
 
-    return () => {
-      isCancelled.current = true;
-    };
+      const cartLength = cartResponse.products.length;
+
+      setCartList(cartLength);
+    }
+    responseCart();
   }, [getCartList]);
 
   return (
@@ -26,7 +26,9 @@ const CartIcon: React.FC = () => {
       <Link href={`/carts/${session?.user?.cart}`}>
         <BsBag />
       </Link>
-      <div className="absolute left-2 w-5 h-5 bg-black text-white rounded-full text-center text-xs">{cartLength}</div>
+      <div className="absolute left-2 w-5 h-5 bg-black text-white rounded-full text-center text-xs">
+        {cartList}
+      </div>
     </div>
   );
 };

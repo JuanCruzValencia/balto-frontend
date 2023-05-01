@@ -8,7 +8,7 @@ export default async function handler(
   switch (req.method) {
     case "POST":
       try {
-        const { data } = await ServerRest.post("/api/users/register", {
+        const { data } = await ServerRest.post("/api/users/restore", {
           ...req.body,
         });
 

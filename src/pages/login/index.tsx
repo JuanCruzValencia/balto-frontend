@@ -2,7 +2,7 @@ import Head from "next/head";
 import { GetServerSideProps, NextPage } from "next";
 import { getServerSession } from "next-auth";
 import LoginComponent from "@/components/login/Login";
-import { authOptions } from "../api/auth/[...nextAuth]";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 interface PageProps {}
 

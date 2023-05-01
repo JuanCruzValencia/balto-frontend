@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { RegisterInputsTypes } from "./types";
 import { BrowserRest } from "@/utils/frontend/browser-rest";
 import { useRouter } from "next/router";
+import { RegisterInputsTypes } from "@/interfaces";
 
 const RegisterComponent = () => {
   const {

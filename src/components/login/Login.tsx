@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useForm, SubmitHandler } from "react-hook-form";
-import { LoginInputTypes } from "./types";
 import { signIn } from "next-auth/react";
+import { LoginInputTypes } from "@/interfaces";
 
 const LoginComponent: React.FC = () => {
   const {
@@ -44,7 +44,7 @@ const LoginComponent: React.FC = () => {
           log
         </button>
       </form>
-      <div>
+      <div className="flex flex-col items-center">
         <span className="text-text">
           No tenes una cuenta? Registrate{" "}
           <Link href={"/register"} className="underline text-font font-bold">
@@ -52,7 +52,7 @@ const LoginComponent: React.FC = () => {
           </Link>
         </span>
         <span className="text-text">
-          Olvidaste tu password
+          Olvidaste tu contrasena{" "}
           <Link href={"/restore"} className="underline text-font font-bold">
             Click Aqui
           </Link>

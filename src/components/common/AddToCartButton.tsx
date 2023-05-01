@@ -17,7 +17,14 @@ const AddToCartButton: React.FC<Props> = ({ pid }) => {
     router.reload();
   };
 
-  return <button onClick={() => handleClick(pid)}>add to cart</button>;
+  return (
+    <button
+      onClick={() => handleClick(pid)}
+      className="text-s bg-font w-full rounded text-white p-2 uppercase shadow-xl font-bold"
+    >
+      add to cart
+    </button>
+  );
 };
 
 export default AddToCartButton;

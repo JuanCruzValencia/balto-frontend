@@ -11,6 +11,10 @@ type Props = {
 const ProductHomeCard: React.FC<Props> = ({ product }) => {
   const { addToCart } = useContext(CartContext) as CartContextProps;
 
+  const handleClick = (pid: Product["_id"]) => {
+    addToCart(pid);
+  };
+
   return (
     <div className="flex bg-white h-[270px] w-full max-w-[560px]">
       <div className="flex flex-col justify-between bg-green h-full w-full p-7">
@@ -29,7 +33,7 @@ const ProductHomeCard: React.FC<Props> = ({ product }) => {
         </div>
         <div>
           <button
-            onClick={() => addToCart(product._id)}
+            onClick={() => handleClick(product._id)}
             className="border-2 border-black text-s w-[185px] h-[60px]"
           >
             Add to Cart

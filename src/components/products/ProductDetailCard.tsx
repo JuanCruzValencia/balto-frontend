@@ -18,25 +18,24 @@ const onAdd = (num: number) => {
 const ProductDetailCard: React.FC<Props> = ({ product }) => {
   return (
     <>
-      <h1>Detailed product</h1>
-      <div className="flex justify-center items-center h-[850px] bg-green">
+      <div className="flex justify-center items-evenly h-[650px] bg-green p-4">
         <Image
           src={product.thumbnail[0]}
           width={100}
           height={100}
           alt={product.title}
-          className="object-cover h-full w-full p-7"
+          className="object-contain w-full bg-white p-10"
         />
-        <div className="flex flex-col items-start justify-evenly max-w-[730px]">
-          <h2 className="text-l font-bold">{product.title}</h2>
+        <div className="flex flex-col items-start justify-center max-w-[700px] gap-8 p-4">
+          <h2 className="text-l font-bold self-center">{product.title}</h2>
           <RatingComponent rating={5} />
           <span className="text-m font-bold">$ {product.price}</span>
           <ProductsQuantity initialValue={1} onAdd={onAdd} />
-          <div>
+          <div className="flex gap-2">
             <AddToCartButton pid={product._id} />
             <AddToFavButton />
           </div>
-          <p>{product.description}</p>
+          <p className="uppercase text-justify text-s">{product.description}</p>
         </div>
       </div>
     </>

@@ -41,7 +41,7 @@ export interface Products {
 }
 
 export interface CartContextProps {
-  getCartList: () => Cart["products"];
+  getCartList: () => Promise<Cart>;
   addToCart: (pid: Product["_id"]) => void;
   deleteItem: (pid: Product["_id"]) => void;
   purchaseCart: () => void;
@@ -49,4 +49,21 @@ export interface CartContextProps {
 
 export type RestoreInputTypes = {
   email: User["email"];
-}
+};
+
+export type ResetPasswordInputs = {
+  password: User["password"];
+};
+
+export type RegisterInputsTypes = {
+  first_name: User["firstName"];
+  last_name: User["lastName"];
+  age: User["age"];
+  email: User["email"];
+  password: User["password"];
+};
+
+export type LoginInputTypes = {
+  email: User["email"];
+  password: User["password"];
+};
