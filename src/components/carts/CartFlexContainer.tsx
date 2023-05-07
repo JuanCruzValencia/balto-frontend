@@ -20,10 +20,10 @@ const CartFlexContainer: React.FC<Props> = ({ cart }) => {
         </div>
       </div>
       <div className="basis-1/4 flex flex-col bg-green w-full min-h-full justify-between px-10 py-5 rounded-r-lg">
-        <h2 className="capitalize font-bold text-font text-l py-16">
+        <h2 className="capitalize font-bold text-font text-l py-16 self-center">
           order details
         </h2>
-        <CartOrderDetail />
+        <CartOrderDetail cart={cart} />
       </div>
     </div>
   );

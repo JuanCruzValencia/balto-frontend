@@ -3,6 +3,7 @@ import { CartContextProps, Product } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
+import { AddToCartButton } from "../common";
 
 type Props = {
   product: Product;
@@ -32,12 +33,10 @@ const ProductHomeCard: React.FC<Props> = ({ product }) => {
           </Link>
         </div>
         <div>
-          <button
-            onClick={() => handleClick(product._id)}
-            className="border-2 border-black text-s w-[185px] h-[60px]"
-          >
-            Add to Cart
-          </button>
+          <AddToCartButton
+            pid={product._id}
+            className="capitalize border-2 border-black text-s w-[185px] h-[60px]"
+          />
         </div>
       </div>
       <Image

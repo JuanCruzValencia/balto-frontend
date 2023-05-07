@@ -32,7 +32,10 @@ const ProductDetailCard: React.FC<Props> = ({ product }) => {
           <span className="text-m font-bold">$ {product.price}</span>
           <ProductsQuantity initialValue={1} onAdd={onAdd} />
           <div className="flex gap-2">
-            <AddToCartButton pid={product._id} />
+            <AddToCartButton
+              pid={product._id}
+              className="text-s bg-font w-full rounded text-white p-2 uppercase shadow-xl font-bold"
+            />
             <AddToFavButton />
           </div>
           <p className="uppercase text-justify text-s">{product.description}</p>

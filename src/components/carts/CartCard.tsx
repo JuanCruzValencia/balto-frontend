@@ -14,7 +14,7 @@ const CartCard: React.FC<Props> = ({ product }) => {
 
   const handleClick = (pid: Product["_id"]) => {
     deleteItem(pid);
-    router.reload(); //TODO maybe its a better way on triggerting the reload
+    router.reload();
   };
 
   return (
@@ -27,7 +27,9 @@ const CartCard: React.FC<Props> = ({ product }) => {
       />
       <div className="flex flex-col">
         <h4 className="font-bold">{product.product.title}</h4>
-        <span className="text-xs">{product.product.description.slice(0, 20)}</span>
+        <span className="text-xs">
+          {product.product.description.slice(0, 20)}
+        </span>
       </div>
       <span>x{product.quantity}</span>
       <span className="font-bold">${product.product.price}</span>

@@ -1,29 +1,37 @@
 import { CartContext } from "@/context/cart/CartContext";
 import { CartContextProps, Product } from "@/interfaces";
+import { toast, ToastContainer } from "react-toastify";
 import { useRouter } from "next/router";
 import { useContext } from "react";
+import "react-toastify/dist/ReactToastify.css";
 
 type Props = {
   pid: Product["_id"];
+  className: string;
 };
 
-const AddToCartButton: React.FC<Props> = ({ pid }) => {
+const AddToCartButton: React.FC<Props> = ({ pid, className }) => {
   const { addToCart } = useContext(CartContext) as CartContextProps;
   const router = useRouter();
 
+  const notify = () => {
+    toast.success("Success Notification !", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
+
   const handleClick = (pid: Product["_id"]) => {
     addToCart(pid);
-
-    router.reload();
+    notify();
   };
 
   return (
-    <button
-      onClick={() => handleClick(pid)}
-      className="text-s bg-font w-full rounded text-white p-2 uppercase shadow-xl font-bold"
-    >
-      add to cart
-    </button>
+    <>
+      <button onClick={() => handleClick(pid)} className={className}>
+        add to cart
+      </button>
+      <ToastContainer />
+    </>
   );
 };
 
