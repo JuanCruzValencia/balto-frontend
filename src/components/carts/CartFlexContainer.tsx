@@ -8,29 +8,29 @@ type Props = {
 };
 
 const CartFlexContainer: React.FC<Props> = ({ cart }) => {
-  const { getCartList } = useContext(CartContext) as CartContextProps;
-  const [cartList, setCartList] = useState<number>();
+  // const { getCartList } = useContext(CartContext) as CartContextProps;
+  // const [cartList, setCartList] = useState<number>();
 
-  useEffect(() => {
-    async function responseCart() {
-      const cartResponse = await getCartList();
+  // useEffect(() => {
+  //   async function responseCart() {
+  //     const cartResponse = await getCartList();
 
-      const cartLength = cartResponse.products.length;
-      
-      setCartList(cartLength);
-    }
-    responseCart();
-  });
+  //     const cartLength = cartResponse.products.length;
+
+  //     setCartList(cartLength);
+  //   }
+  //   responseCart();
+  // });
 
   return (
-    <>
-      <h1 className="capitalize font-bold text-l">shopping cart</h1>
+    <div className="flex flex-col justify-center bg-white w-full h-full px-10 rounded">
+      <h1 className="capitalize font-bold text-font text-l py-10">shopping cart</h1>
       <div className="flex flex-col items-center justyfy-start">
         {cart.products.map((product) => {
           return <CartCard product={product} key={product.product._id} />;
         })}
       </div>
-    </>
+    </div>
   );
 };
 

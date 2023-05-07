@@ -18,19 +18,21 @@ const CartCard: React.FC<Props> = ({ product }) => {
   };
 
   return (
-    <div className="flex gap-5 bg-white items-center justify-center p-5">
+    <div className="flex gap-5 bg-white items-center justify-evenly p-5 w-full">
       <Image
         src={product.product.thumbnail[0]}
-        width={50}
-        height={50}
+        width={70}
+        height={70}
         alt={product.product._id}
       />
-      <h4>{product.product.title}</h4>
-      <span>{product.product.description.slice(0, 20)}</span>
+      <div className="flex flex-col">
+        <h4 className="font-bold">{product.product.title}</h4>
+        <span className="text-xs">{product.product.description.slice(0, 20)}</span>
+      </div>
       <span>{product.quantity}</span>
-      <span>{product.product.price}</span>
+      <span className="font-bold">${product.product.price}</span>
       <button
-        className="capitalize text-red"
+        className="capitalize text-red font-bold"
         onClick={() => handleClick(product.product._id)}
       >
         delete

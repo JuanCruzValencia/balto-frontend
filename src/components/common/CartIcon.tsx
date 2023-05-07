@@ -7,19 +7,19 @@ import { CartContextProps } from "@/interfaces";
 
 const CartIcon: React.FC = () => {
   const { getCartList } = useContext(CartContext) as CartContextProps;
-  const [cartList, setCartList] = useState<number>();
+  const [cartList, setCartList] = useState<number>(0);
   const { data: session } = useSession();
 
-  useEffect(() => {
-    async function responseCart() {
-      const cartResponse = await getCartList();
+  // useEffect(() => {
+  //   async function responseCart() {
+  //     const cartResponse = await getCartList();
 
-      const cartLength = cartResponse.products.length;
+  //     const cartLength = cartResponse.products.length;
 
-      setCartList(cartLength);
-    }
-    responseCart();
-  }, [getCartList]);
+  //     setCartList(cartLength);
+  //   }
+  //   responseCart();
+  // });
 
   return (
     <div className="relative">
