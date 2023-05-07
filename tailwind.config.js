@@ -14,6 +14,7 @@ module.exports = {
       white: "#ffffff",
       footer: "#008080",
       red: "#d64045",
+      lgrey: "#e9ecef",
     },
     fontSize: {
       xs: "14px",

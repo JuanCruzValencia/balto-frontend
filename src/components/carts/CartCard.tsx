@@ -18,7 +18,7 @@ const CartCard: React.FC<Props> = ({ product }) => {
   };
 
   return (
-    <div className="flex gap-5 bg-white items-center justify-evenly p-5 w-full">
+    <div className="flex gap-5 bg-white items-center justify-between p-5 w-full border-b-2 border-lgrey">
       <Image
         src={product.product.thumbnail[0]}
         width={70}
@@ -29,7 +29,7 @@ const CartCard: React.FC<Props> = ({ product }) => {
         <h4 className="font-bold">{product.product.title}</h4>
         <span className="text-xs">{product.product.description.slice(0, 20)}</span>
       </div>
-      <span>{product.quantity}</span>
+      <span>x{product.quantity}</span>
       <span className="font-bold">${product.product.price}</span>
       <button
         className="capitalize text-red font-bold"
