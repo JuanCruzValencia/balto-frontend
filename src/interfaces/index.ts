@@ -9,6 +9,7 @@ export interface User {
   age: number;
   cart: Cart["_id"];
   role: ROLE;
+  last_connection: Date;
 }
 
 export enum ROLE {
@@ -45,6 +46,13 @@ export interface CartContextProps {
   addToCart: (pid: Product["_id"]) => void;
   deleteItem: (pid: Product["_id"]) => void;
   purchaseCart: () => void;
+}
+
+export interface UserContextProps {
+  getUsersList: () => Promise<User[]>;
+  changeRole: (uid: User["_id"]) => void;
+  deleteUser: (uid: User["_id"]) => void;
+  deleteAllUsers: () => Promise<void>;
 }
 
 export type RestoreInputTypes = {

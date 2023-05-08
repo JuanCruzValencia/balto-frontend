@@ -1,7 +1,6 @@
 import { CartContext } from "@/context/cart/CartContext";
 import { CartContextProps, Product } from "@/interfaces";
 import { toast, ToastContainer } from "react-toastify";
-import { useRouter } from "next/router";
 import { useContext } from "react";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -12,7 +11,6 @@ type Props = {
 
 const AddToCartButton: React.FC<Props> = ({ pid, className }) => {
   const { addToCart } = useContext(CartContext) as CartContextProps;
-  const router = useRouter();
 
   const notify = () => {
     toast.success("Success Notification !", {

@@ -23,15 +23,24 @@ const CartIcon: React.FC = () => {
     responseCart();
   });
 
+  if (session) {
+    return (
+      <div className="relative">
+        <Link href={`/carts/${session?.user?.cart}`}>
+          <BsBag />
+        </Link>
+        <div className="absolute left-2 w-5 h-5 bg-black text-white rounded-full text-center text-xs">
+          {cartList}
+        </div>
+      </div>
+    );
+  }
   return (
-    <div className="relative">
-      <Link href={`/carts/${session?.user?.cart}`}>
+    <>
+      <Link href={`/`}>
         <BsBag />
       </Link>
-      <div className="absolute left-2 w-5 h-5 bg-black text-white rounded-full text-center text-xs">
-        {cartList}
-      </div>
-    </div>
+    </>
   );
 };
 
