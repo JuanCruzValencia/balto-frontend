@@ -10,16 +10,18 @@ const CartIcon: React.FC = () => {
   const [cartList, setCartList] = useState<number>(0);
   const { data: session } = useSession();
 
-  // useEffect(() => {
-  //   async function responseCart() {
-  //     const cartResponse = await getCartList();
+  useEffect(() => {
+    if (!session?.user?.cart) return;
 
-  //     const cartLength = cartResponse.products.length;
+    async function responseCart() {
+      const cartResponse = await getCartList();
 
-  //     setCartList(cartLength);
-  //   }
-  //   responseCart();
-  // });
+      const cartLength = cartResponse.products.length;
+
+      setCartList(cartLength);
+    }
+    responseCart();
+  });
 
   return (
     <div className="relative">

@@ -67,3 +67,11 @@ export type LoginInputTypes = {
   email: User["email"];
   password: User["password"];
 };
+
+export interface Ticket {
+  id: string;
+  code: string;
+  amount: number;
+  purchaser: string;
+  purchased_datetime: Date;
+}

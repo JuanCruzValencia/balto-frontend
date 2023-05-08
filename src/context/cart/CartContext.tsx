@@ -1,4 +1,4 @@
-import { Cart, CartContextProps, Product } from "@/interfaces";
+import { CartContextProps, Product } from "@/interfaces";
 import { BrowserRest } from "@/utils/frontend/browser-rest";
 import { createContext } from "react";
 import { useRouter } from "next/router";
