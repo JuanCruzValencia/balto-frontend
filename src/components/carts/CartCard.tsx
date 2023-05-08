@@ -1,22 +1,12 @@
-import { CartContextProps, Product, Products } from "@/interfaces";
+import { Products } from "@/interfaces";
 import Image from "next/image";
-import { useContext } from "react";
-import { CartContext } from "@/context/cart/CartContext";
-import { useRouter } from "next/router";
+import DeleteFromCartBtn from "../common/DeleteFromCartBtn";
 
 type Props = {
   product: Products;
 };
 
 const CartCard: React.FC<Props> = ({ product }) => {
-  const { deleteItem } = useContext(CartContext) as CartContextProps;
-  const router = useRouter();
-
-  const handleClick = (pid: Product["_id"]) => {
-    deleteItem(pid);
-    router.reload();
-  };
-
   return (
     <div className="flex gap-5 bg-white items-center justify-between p-5 w-full border-b-2 border-lgrey">
       <Image
@@ -33,12 +23,10 @@ const CartCard: React.FC<Props> = ({ product }) => {
       </div>
       <span>x{product.quantity}</span>
       <span className="font-bold">${product.product.price}</span>
-      <button
+      <DeleteFromCartBtn
+        pid={product.product._id}
         className="capitalize text-red font-bold"
-        onClick={() => handleClick(product.product._id)}
-      >
-        delete
-      </button>
+      />
     </div>
   );
 };

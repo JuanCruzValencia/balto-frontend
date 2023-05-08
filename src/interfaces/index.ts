@@ -1,3 +1,4 @@
+import { AxiosResponse } from "axios";
 import { type } from "os";
 
 export interface User {
@@ -43,16 +44,16 @@ export interface Products {
 
 export interface CartContextProps {
   getCartList: () => Promise<Cart>;
-  addToCart: (pid: Product["_id"]) => void;
-  deleteItem: (pid: Product["_id"]) => void;
+  addToCart: (pid: Product["_id"]) => AxiosResponse;
+  deleteItem: (pid: Product["_id"]) => AxiosResponse;
   purchaseCart: () => void;
 }
 
 export interface UserContextProps {
   getUsersList: () => Promise<User[]>;
-  changeRole: (uid: User["_id"]) => void;
-  deleteUser: (uid: User["_id"]) => void;
-  deleteAllUsers: () => Promise<void>;
+  changeRole: (uid: User["_id"]) => AxiosResponse;
+  deleteUser: (uid: User["_id"]) => AxiosResponse;
+  deleteAllUsers: () => AxiosResponse;
 }
 
 export type RestoreInputTypes = {
@@ -82,4 +83,9 @@ export interface Ticket {
   amount: number;
   purchaser: string;
   purchased_datetime: Date;
+}
+
+export enum RESPONSE_STATUS {
+  SUCCESS = 200,
+  ERROR = 400,
 }

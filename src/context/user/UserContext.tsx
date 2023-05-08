@@ -29,7 +29,7 @@ export const UserProvider: React.FC<Props> = ({ children }) => {
       },
     });
 
-    return response.data;
+    return response;
   };
 
   const deleteUser = async (uid: User["_id"]) => {
@@ -39,7 +39,7 @@ export const UserProvider: React.FC<Props> = ({ children }) => {
       },
     });
 
-    return response.data;
+    return response;
   };
 
   const deleteAllUsers = async () => {
@@ -49,7 +49,7 @@ export const UserProvider: React.FC<Props> = ({ children }) => {
       },
     });
 
-    return response.data;
+    return response;
   };
 
   const data = {

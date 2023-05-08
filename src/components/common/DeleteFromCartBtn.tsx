@@ -9,8 +9,8 @@ type Props = {
   className: string;
 };
 
-const AddToCartButton: React.FC<Props> = ({ pid, className }) => {
-  const { addToCart } = useContext(CartContext) as CartContextProps;
+const DeleteFromCartBtn: React.FC<Props> = ({ pid, className }) => {
+  const { deleteItem } = useContext(CartContext) as CartContextProps;
 
   const notify = () => {
     toast.success("Success Notification !", {
@@ -19,7 +19,7 @@ const AddToCartButton: React.FC<Props> = ({ pid, className }) => {
   };
 
   const handleClick = (pid: Product["_id"]) => {
-    const response = addToCart(pid);
+    const response = deleteItem(pid);
 
     if (response.status === RESPONSE_STATUS.SUCCESS) notify();
   };
@@ -27,11 +27,11 @@ const AddToCartButton: React.FC<Props> = ({ pid, className }) => {
   return (
     <>
       <button onClick={() => handleClick(pid)} className={className}>
-        add to cart
+        delete
       </button>
       <ToastContainer />
     </>
   );
 };
 
-export default AddToCartButton;
+export default DeleteFromCartBtn;

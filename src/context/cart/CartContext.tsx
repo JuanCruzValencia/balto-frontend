@@ -37,11 +37,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
       }
     );
 
-    if (response.status === 200) {
-      router.push(`/carts/${userCartId}`);
-    }
-
-    return response.data;
+    return response;
   };
 
   const deleteItem = async (pid: Product["_id"]) => {
@@ -54,9 +50,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
       }
     );
 
-    console.log(response.data);
-
-    return response.data;
+    return response;
   };
 
   const purchaseCart = async () => {
