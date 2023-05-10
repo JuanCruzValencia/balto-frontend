@@ -6,6 +6,7 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js";
 import { FormEvent } from "react";
+import PayButton from "./PayButton";
 
 const stripePromise = getStripe();
 
@@ -38,7 +39,7 @@ const PaymentForm: React.FC = () => {
     <Elements stripe={stripePromise}>
       <form onSubmit={handleSubmit}>
         <CardElement />
-        <button type="submit">pagar</button>
+        <PayButton total={200} />
       </form>
     </Elements>
   );

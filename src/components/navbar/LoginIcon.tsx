@@ -4,6 +4,7 @@ import Link from "next/link";
 
 const LoginIcon = () => {
   const { data: session } = useSession();
+
   if (session) {
     return (
       <>

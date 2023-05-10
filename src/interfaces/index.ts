@@ -47,6 +47,7 @@ export interface CartContextProps {
   addToCart: (pid: Product["_id"]) => AxiosResponse;
   deleteItem: (pid: Product["_id"]) => AxiosResponse;
   purchaseCart: () => void;
+  paymentIntent: (total: number) => AxiosResponse;
 }
 
 export interface UserContextProps {

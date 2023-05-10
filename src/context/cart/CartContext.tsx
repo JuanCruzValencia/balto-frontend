@@ -53,7 +53,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
     return response;
   };
 
-  const purchaseCart = async () => {
+  const getTicket = async () => {
     const response = await BrowserRest.post(
       `/carts/${userCartId}/purchase`,
       {},
@@ -67,11 +67,28 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
     return response.data;
   };
 
+  const paymentIntent = async (total: number) => {
+    const response = await BrowserRest.post(
+      "/payment/client-payment-intent",
+      {
+        total,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${session?.user?.token}`,
+        },
+      }
+    );
+
+    return response;
+  };
+
   const data = {
     getCartList,
     addToCart,
     deleteItem,
-    purchaseCart,
+    getTicket,
+    paymentIntent,
   };
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>;
