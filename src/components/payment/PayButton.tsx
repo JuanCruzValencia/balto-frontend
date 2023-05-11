@@ -28,7 +28,7 @@ const PayButton: React.FC<Props> = ({ total }) => {
 
   return (
     <>
-      <button onClick={() => handleClick}>Comprar</button>;
+      <button onClick={() => handleClick(total)}>Comprar</button>
     </>
   );
 };

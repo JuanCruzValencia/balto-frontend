@@ -8,15 +8,19 @@ export default async function handler(
   const token = req.headers.authorization;
 
   switch (req.method) {
-    case "GET":
+    case "POST":
       try {
-        const { cid } = req.query;
-
-        const { data } = await ServerRest.get(`/api/carts/${cid}`, {
-          headers: {
-            Authorization: token,
+        const { data } = await ServerRest.post(
+          `/api/payment/client-payment-intent`,
+          {
+            ...req.body,
           },
-        });
+          {
+            headers: {
+              Authorization: token,
+            },
+          }
+        );
 
         return res.status(200).send(data);
       } catch (error: any) {
@@ -27,7 +31,7 @@ export default async function handler(
       break;
 
     default:
-      res.setHeader("Allow", ["GET"]);
+      res.setHeader("Allow", ["POST"]);
       res.status(405).end(`Method ${req.method} Not Allowed`);
       break;
   }

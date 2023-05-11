@@ -1,7 +1,6 @@
 import { CartContextProps, Product } from "@/interfaces";
 import { BrowserRest } from "@/utils/frontend/browser-rest";
 import { createContext } from "react";
-import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 
 export const CartContext = createContext<CartContextProps | {}>({});
@@ -11,11 +10,9 @@ type Props = {
 };
 
 export const CartProvider: React.FC<Props> = ({ children }) => {
-  const router = useRouter();
   const { data: session } = useSession();
   const userCartId = session?.user?.cart;
 
-  //TODO logica para que cuando inicio sesion me traiga los datos del carrito de la DB
   const getCartList = async () => {
     const response = await BrowserRest.get(`/carts/${userCartId}`, {
       headers: {
@@ -82,6 +79,28 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
 
     return response;
   };
+
+  // useEffect(() => {
+  //   async function getCartList() {
+  //     const response = await BrowserRest.get(`/carts/${userCartId}`, {
+  //       headers: {
+  //         Authorization: `Bearer ${session?.user?.token}`,
+  //       },
+  //     });
+
+  //     return response.data.payload;
+  //   }
+  //   async function responseCart() {
+  //     if (session) {
+  //       const cartResponse = await getCartList();
+
+  //       const cartLength = cartResponse.products.length;
+
+  //       setCartQunatity(cartLength);
+  //     }
+  //   }
+  //   responseCart();
+  // }, [session, userCartId]);
 
   const data = {
     getCartList,

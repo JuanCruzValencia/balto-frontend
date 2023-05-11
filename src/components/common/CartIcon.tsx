@@ -1,27 +1,11 @@
 import Link from "next/link";
 import { BsBag } from "react-icons/bs";
 import { useSession } from "next-auth/react";
-import { useContext, useEffect, useRef, useState } from "react";
-import { CartContext } from "@/context/cart/CartContext";
-import { CartContextProps } from "@/interfaces";
+import { useCartLength } from "@/hooks";
 
 const CartIcon: React.FC = () => {
-  const { getCartList } = useContext(CartContext) as CartContextProps;
-  const [cartList, setCartList] = useState<number>(0);
   const { data: session } = useSession();
-
-  useEffect(() => {
-    if (!session?.user?.cart) return;
-
-    async function responseCart() {
-      const cartResponse = await getCartList();
-
-      const cartLength = cartResponse.products.length;
-
-      setCartList(cartLength);
-    }
-    responseCart();
-  });
+  const { totalCart } = useCartLength();
 
   if (session) {
     return (
@@ -30,7 +14,7 @@ const CartIcon: React.FC = () => {
           <BsBag />
         </Link>
         <div className="absolute left-2 w-5 h-5 bg-black text-white rounded-full text-center text-xs">
-          {cartList}
+          {totalCart}
         </div>
       </div>
     );
