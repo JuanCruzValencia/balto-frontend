@@ -41,6 +41,7 @@ const ResetPasswordForm: React.FC = () => {
           type="password"
           placeholder="Enter a new password"
           className="p-1 bg-green border-b-2 outline-none border-font w-full"
+          {...register("password")}
         />
         {errors.password && <span>This field is required</span>}
         <button

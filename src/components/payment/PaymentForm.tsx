@@ -1,92 +1,62 @@
-import {
-  CardElement,
-  PaymentElement,
-  useElements,
-  useStripe,
-} from "@stripe/react-stripe-js";
-import { FormEvent, useEffect } from "react";
-import PayButton from "./PayButton";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useEffect, useState } from "react";
+import { BrowserRest } from "@/utils/frontend/browser-rest";
+import { RESPONSE_STATUS } from "@/interfaces";
+import { useSession } from "next-auth/react";
+
+type StripeResponse = {
+  payload: {
+    "client-secret": string;
+  };
+};
 
 const PaymentForm: React.FC = () => {
+  const { data: session } = useSession();
+  const [stripeScret, setStripeSecret] = useState<string>();
   const stripe = useStripe();
   const elements = useElements();
 
-  // const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  //   e.preventDefault();
-
-  //   if (!stripe || !elements) return;
-
-  //   const cartElement = elements.getElement(CardElement);
-
-  //   const { error, paymentIntent } = await stripe?.confirmPayment({
-  //     elements,
-  //     redirect: "if_required",
-  //   });
-
-  //   if (error) {
-  //     console.log(error);
-  //   } else {
-  //     console.log("Compra realizada");
-
-  //     cartElement!.clear();
-  //   }
-  // };
   useEffect(() => {
+    if (session) {
+      const getClientSecret = async () => {
+        const response = await BrowserRest.post<StripeResponse>(
+          "/payment",
+          {
+            total: 200,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${session.user?.token}`,
+            },
+          }
+        );
 
-  })
+        if (response.status === RESPONSE_STATUS.SUCCESS) {
+          setStripeSecret(response.data.payload["client-secret"]); //TODO modify backend to get the object
+        }
+      };
+      getClientSecret();
+    }
+  }, [session]);
+
+  const makePayment = async () => {
+    const payload = await stripe?.confirmCardPayment(stripeScret!, {
+      payment_method: {
+        card: elements?.getElement(CardElement)!,
+      },
+    });
+    console.log(payload);
+  };
 
   return (
-      <form
-        // onSubmit={handleSubmit}
-        className="w-[600px] h-[300px] items-center justify-center gap-10 p-10 bg-green"
-      >
-        <CardElement />
-        <PayButton total={200} />
-      </form>
+    <form
+      onSubmit={makePayment}
+      className="w-[600px] h-[300px] items-center justify-center gap-10 p-10 bg-green"
+    >
+      <CardElement />
+      <button>Comprar</button>
+    </form>
   );
 };
 
 export default PaymentForm;
-
-// import React, { useState, useEffect } from "react";
-// import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-
-// const totalPrice = 1400; // this means 14 usd and can also be calculated at the backend
-
-// export const MyCheckoutForm = () => {
-  
-//   const [clientSecret, setClientSecret] = useState("");
-//   const stripe = useStripe();
-//   const elements = useElements();
-
-//   // STEP 1: create a payment intent and getting the secret
-//   useEffect(() => {
-//     fetch("http://localhost:3001/create-payment-intent", {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ price: totalPrice }),
-//     })
-//       .then(res => res.json())
-//       .then((data) => {
-//         setClientSecret(data.clientSecret);  // <-- setting the client secret here
-//       });
-//   }, []);
-
-//   // STEP 2: make the payment after filling the form properly
-//   const makePayment = async () => {
-//      const payload = await stripe.confirmCardPayment(clientSecret, {
-//       payment_method: {
-//         card: elements.getElement(CardElement),
-//       },
-//     });
-//   }
-
-//   return (
-//     <form id="payment-form" onSubmit={makePayment}>
-//       <CardElement id="card-element" onChange={handleChange} />
-//       <button id="submit"> Pay Now </button>
-//     </form>
-//   );
-// };

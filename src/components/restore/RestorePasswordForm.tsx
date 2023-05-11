@@ -38,6 +38,7 @@ const RestorePasswordForm = () => {
           type="email"
           placeholder="Entre your email"
           className="p-1 bg-green border-b-2 outline-none border-font w-full"
+          {...register("email")}
         />
         {errors.email && <span>This field is required</span>}
         <button

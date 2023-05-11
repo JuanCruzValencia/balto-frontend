@@ -22,6 +22,8 @@ export default async function handler(
           }
         );
 
+        console.log(data);
+
         return res.status(200).send(data);
       } catch (error: any) {
         if (error?.response?.status === 404) {
