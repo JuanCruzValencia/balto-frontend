@@ -91,3 +91,8 @@ export enum RESPONSE_STATUS {
   SUCCESS = 200,
   ERROR = 400,
 }
+
+export enum STRIPE_STATUS {
+  SUCCESS = "succeeded",
+  ERROR = "ERROR",
+}
