@@ -13,7 +13,7 @@ const AddToCartButton: React.FC<Props> = ({ pid, className }) => {
   const { addToCart } = useContext(CartContext) as CartContextProps;
 
   const notify = () => {
-    toast.success("Success Notification !", {
+    toast.success("Success Notification!", {
       position: toast.POSITION.TOP_CENTER,
     });
   };

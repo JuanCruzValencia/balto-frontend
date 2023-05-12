@@ -7,9 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 type Props = {
   pid: Product["_id"];
   className: string;
+  render: () => void;
 };
 
-const DeleteFromCartBtn: React.FC<Props> = ({ pid, className }) => {
+const DeleteFromCartBtn: React.FC<Props> = ({ pid, className, render }) => {
   const { deleteItem } = useContext(CartContext) as CartContextProps;
 
   const notify = () => {
@@ -21,7 +22,10 @@ const DeleteFromCartBtn: React.FC<Props> = ({ pid, className }) => {
   const handleClick = (pid: Product["_id"]) => {
     const response = deleteItem(pid);
 
-    if (response.status === RESPONSE_STATUS.SUCCESS) notify();
+    if (response.status === RESPONSE_STATUS.SUCCESS) {
+      notify();
+      render();
+    }
   };
 
   return (

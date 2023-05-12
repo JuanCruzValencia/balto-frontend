@@ -43,15 +43,19 @@ const PaymentForm: React.FC = () => {
       }
     );
 
-    const { client_secret: clientSecret } = await res.data.payload;
+    const { client_secret: clientSecret } = res.data.payload;
 
     if (!elements) return;
+
+    const purchaseUrl = `${process.env.NEXT_API_URL}/carts/${session?.user?.cart}/purchase`;
+
+    console.log(purchaseUrl);
 
     const { error } = await stripe.confirmPayment({
       elements,
       clientSecret,
       confirmParams: {
-        return_url: `${process.env.NEXT_API_URL}/carts/${session?.user?.cart}/purchase`,
+        return_url: purchaseUrl,
       },
     });
 
@@ -63,13 +67,13 @@ const PaymentForm: React.FC = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-[600px] h-[300px] text-center p-10 bg-white"
+      className="w-[600px] h-full bg-green rounded shadow-2xl text-center p-5 flex flex-col gap-2"
     >
-      <span className="text-s w-full h-[30px] p-2  uppercase font-bold">
+      <span className="text-s underline w-full h-[30px] m-2 uppercase font-bold">
         Ingrese los datos de su tarjeta
       </span>
       <PaymentElement />
-      <button className="text-s bg-font w-full rounded text-white p-2 m-5 uppercase shadow-xl font-bold max-w-[200px]">
+      <button className="text-s self-center bg-font w-full rounded text-white p-2 m-5 uppercase shadow-xl font-bold max-w-[200px]">
         Comprar
       </button>
     </form>
@@ -77,67 +81,3 @@ const PaymentForm: React.FC = () => {
 };
 
 export default PaymentForm;
-
-// useEffect(() => {
-//   if (session) {
-//     const getClientSecret = async () => {
-//       const response = await BrowserRest.post<StripeResponse>(
-//         "/payment",
-//         {
-//           total: 200,
-//         },
-//         {
-//           headers: {
-//             Authorization: `Bearer ${session.user?.token}`,
-//           },
-//         }
-//       );
-
-//       if (response.status === RESPONSE_STATUS.SUCCESS) {
-//         setStripeSecret(response.data.payload.client_secret);
-//       }
-//     };
-//     getClientSecret();
-//   }
-// }, [session]);
-
-// const makePayment = async (e: FormEvent<HTMLFormElement>) => {
-//   e.preventDefault();
-
-//   const el = elements?.getElement(CardElement);
-//   console.log(el);
-
-//   const payload = await stripe?.confirmCardPayment(stripeScret!, {
-//     payment_method: {
-//       card: elements?.getElement(CardElement)!,
-//     },
-//   });
-
-//   if (payload?.paymentIntent?.status === STRIPE_STATUS.SUCCESS) {
-//     router.push(`/carts/${session?.user?.cart}/purchase`);
-//   } else {
-//     router.push(`/carts/${session?.user?.cart}`);
-//   }
-// };
-
-// const CARD_ELEMENT_OPTIONS = {
-//   style: {
-//     base: {
-//       color: "#32325d",
-//       fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-//       fontSmoothing: "antialiased",
-//       fontSize: "16px",
-//       "::placeholder": {
-//         color: "#aab7c4",
-//       },
-//     },
-//     invalid: {
-//       color: "#fa755a",
-//       iconColor: "#fa755a",
-//     },
-//   },
-// };
-
-// <CardElement options={CARD_ELEMENT_OPTIONS} />
-
-// const [stripeScret, setStripeSecret] = useState<string>();
