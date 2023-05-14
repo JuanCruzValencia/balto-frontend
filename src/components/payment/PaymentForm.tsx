@@ -83,7 +83,7 @@ const PaymentForm: React.FC<Props> = ({ cart }) => {
         Ingrese los datos de su tarjeta
       </span>
       <PaymentElement />
-      <button className="text-s self-center bg-font w-full rounded text-white p-2 m-5 uppercase shadow-xl font-bold max-w-[200px]">
+      <button className="text-s self-center bg-font w-full rounded text-white p-2 m-5 uppercase shadow-xl font-bold max-w-[200px] hover:bg-footer">
         Comprar
       </button>
     </form>
