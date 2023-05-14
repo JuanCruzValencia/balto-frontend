@@ -3,11 +3,11 @@ import PaymentForm from "@/components/payment/PaymentForm";
 import { NextPage } from "next";
 import Head from "next/head";
 
-const testForm: NextPage = () => {
+const Payment: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Balto | Test Component</title>
+        <title>Balto | Payment Component</title>
       </Head>
       <main>
         <PaymentContainer>
@@ -18,4 +18,4 @@ const testForm: NextPage = () => {
   );
 };
 
-export default testForm;
+export default Payment;

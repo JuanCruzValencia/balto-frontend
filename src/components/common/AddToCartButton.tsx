@@ -13,13 +13,13 @@ const AddToCartButton: React.FC<Props> = ({ pid, className }) => {
   const { addToCart } = useContext(CartContext) as CartContextProps;
 
   const notify = () => {
-    toast.success("Success Notification!", {
+    toast.success("Producto agregado al carrito!", {
       position: toast.POSITION.TOP_CENTER,
     });
   };
 
-  const handleClick = (pid: Product["_id"]) => {
-    const response = addToCart(pid);
+  const handleClick = async (pid: Product["_id"]) => {
+    const response = await addToCart(pid);
 
     if (response.status === RESPONSE_STATUS.SUCCESS) notify();
   };

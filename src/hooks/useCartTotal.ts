@@ -1,20 +1,34 @@
-import { Cart } from "@/interfaces";
-import { useState } from "react";
+import { CartContext } from "@/context/cart/CartContext";
+import { Cart, CartContextProps } from "@/interfaces";
+import { useContext, useEffect, useState } from "react";
 
-type Props = {
-  cart: Cart;
-};
+const useCartTotal = () => {
+  const [total, setTotal] = useState<number | undefined>(0);
+  const [cart, setCart] = useState<Cart | null>(null);
+  const { getCartList } = useContext(CartContext) as CartContextProps;
 
-const useCartTotal = ({ cart }: Props): number => {
-  const [total, setTotal] = useState<number>(0);
+  useEffect(() => {
+    const getCart = async () => {
+      const res = await getCartList();
 
-  const getTotal = cart.products
-    .map((product) => {
-      return product.product.price * product.quantity;
-    })
-    .reduce((acc, curr) => acc + curr, 0);
+      setCart(res);
+    };
 
-  setTotal(getTotal);
+    getCart();
+  }, []);
+
+  if (cart) {
+    const getTotal = cart?.products
+      .map((product) => {
+        return product.product.price * product.quantity;
+      })
+      .reduce((acc, curr) => acc + curr, 0);
+
+      console.log(getTotal);
+      
+
+    setTotal(getTotal);
+  }
 
   return total;
 };

@@ -14,13 +14,17 @@ const DeleteFromCartBtn: React.FC<Props> = ({ pid, className, render }) => {
   const { deleteItem } = useContext(CartContext) as CartContextProps;
 
   const notify = () => {
-    toast.success("Success Notification !", {
+    toast.success("Producto eliminado del carrito!", {
       position: toast.POSITION.TOP_CENTER,
     });
   };
 
-  const handleClick = (pid: Product["_id"]) => {
-    const response = deleteItem(pid);
+  const handleClick = async (pid: Product["_id"]) => {
+    console.log("eliminando producto...");
+
+    const response = await deleteItem(pid);
+
+    console.log(response);
 
     if (response.status === RESPONSE_STATUS.SUCCESS) {
       notify();
