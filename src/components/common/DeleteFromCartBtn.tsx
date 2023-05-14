@@ -7,28 +7,22 @@ import "react-toastify/dist/ReactToastify.css";
 type Props = {
   pid: Product["_id"];
   className: string;
-  render: () => void;
 };
 
-const DeleteFromCartBtn: React.FC<Props> = ({ pid, className, render }) => {
+const DeleteFromCartBtn: React.FC<Props> = ({ pid, className }) => {
   const { deleteItem } = useContext(CartContext) as CartContextProps;
 
   const notify = () => {
-    toast.success("Producto eliminado del carrito!", {
+    toast.error("Producto eliminado del carrito!", {
       position: toast.POSITION.TOP_CENTER,
     });
   };
 
   const handleClick = async (pid: Product["_id"]) => {
-    console.log("eliminando producto...");
-
     const response = await deleteItem(pid);
-
-    console.log(response);
 
     if (response.status === RESPONSE_STATUS.SUCCESS) {
       notify();
-      render();
     }
   };
 

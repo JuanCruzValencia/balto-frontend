@@ -1,15 +1,12 @@
 import { Cart } from "@/interfaces";
 import CartCard from "./CartCard";
 import CartOrderDetail from "./CartOrderDetail";
-import useRender from "@/hooks/useRender";
 
 type Props = {
   cart: Cart;
 };
 
 const CartFlexContainer: React.FC<Props> = ({ cart }) => {
-  const render = useRender();
-
   return (
     <div className="flex w-full w-full h-full rounded-lg drop-shadow-xl">
       <div className="basis-3/4 flex flex-col justify-center bg-white w-full min-h-full px-10 py-5 rounded-l-lg">
@@ -18,13 +15,7 @@ const CartFlexContainer: React.FC<Props> = ({ cart }) => {
         </h2>
         <div className="flex flex-col items-center justyfy-start">
           {cart.products.map((product) => {
-            return (
-              <CartCard
-                product={product}
-                key={product.product._id}
-                render={render}
-              />
-            );
+            return <CartCard product={product} key={product.product._id} />;
           })}
         </div>
       </div>

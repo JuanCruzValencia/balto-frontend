@@ -46,7 +46,7 @@ const ResetPasswordForm: React.FC = () => {
         {errors.password && <span>This field is required</span>}
         <button
           type="submit"
-          className="text-s bg-font w-full rounded text-white p-2 uppercase shadow-xl font-bold"
+          className="text-s bg-font w-full rounded text-white p-2 uppercase shadow-xl font-bold hover:bg-footer"
         >
           confirmar
         </button>

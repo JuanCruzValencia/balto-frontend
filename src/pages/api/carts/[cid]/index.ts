@@ -26,8 +26,26 @@ export default async function handler(
       }
       break;
 
+    case "DELETE":
+      try {
+        const { cid } = req.query;
+
+        const { data } = await ServerRest.delete(`/api/carts/${cid}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
+
+        return res.status(200).send(data);
+      } catch (error: any) {
+        if (error?.response?.status === 404) {
+          return res.status(404).end();
+        }
+      }
+      break;
+
     default:
-      res.setHeader("Allow", ["GET"]);
+      res.setHeader("Allow", ["GET", "DELETE"]);
       res.status(405).end(`Method ${req.method} Not Allowed`);
       break;
   }

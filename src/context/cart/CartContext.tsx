@@ -12,11 +12,12 @@ type Props = {
 export const CartProvider: React.FC<Props> = ({ children }) => {
   const { data: session } = useSession();
   const userCartId = session?.user?.cart;
+  const token = session?.user?.token;
 
   const getCartList = async () => {
     const response = await BrowserRest.get(`/carts/${userCartId}`, {
       headers: {
-        Authorization: `Bearer ${session?.user?.token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -29,7 +30,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
       {},
       {
         headers: {
-          Authorization: `Bearer ${session?.user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -42,12 +43,10 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
       `/carts/${userCartId}/product/${pid}`,
       {
         headers: {
-          Authorization: `Bearer ${session?.user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
-
-    console.log(response);
 
     return response;
   };
@@ -58,7 +57,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
       {},
       {
         headers: {
-          Authorization: `Bearer ${session?.user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -74,7 +73,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
       },
       {
         headers: {
-          Authorization: `Bearer ${session?.user?.token}`,
+          Authorization: `Bearer ${token}`,
         },
       }
     );
@@ -82,27 +81,15 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
     return response;
   };
 
-  // useEffect(() => {
-  //   async function getCartList() {
-  //     const response = await BrowserRest.get(`/carts/${userCartId}`, {
-  //       headers: {
-  //         Authorization: `Bearer ${session?.user?.token}`,
-  //       },
-  //     });
+  const clearCart = async () => {
+    const response = await BrowserRest.delete(`/carts/${userCartId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-  //     return response.data.payload;
-  //   }
-  //   async function responseCart() {
-  //     if (session) {
-  //       const cartResponse = await getCartList();
-
-  //       const cartLength = cartResponse.products.length;
-
-  //       setCartQunatity(cartLength);
-  //     }
-  //   }
-  //   responseCart();
-  // }, [session, userCartId]);
+    return response;
+  };
 
   const data = {
     getCartList,
@@ -110,6 +97,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
     deleteItem,
     getTicket,
     paymentIntent,
+    clearCart,
   };
 
   return <CartContext.Provider value={data}>{children}</CartContext.Provider>;

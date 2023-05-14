@@ -3,10 +3,11 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js";
-import { FormEvent } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { BrowserRest } from "@/utils/frontend/browser-rest";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { Cart } from "@/interfaces";
+import { cartTotals } from "../carts/utils";
 
 type StripeResponse = {
   payload: {
@@ -14,11 +15,22 @@ type StripeResponse = {
   };
 };
 
-const PaymentForm: React.FC = () => {
+type Props = {
+  cart: Cart;
+};
+
+const PaymentForm: React.FC<Props> = ({ cart }) => {
+  const [cartTotal, setCartTotal] = useState<number>(0);
+
+  useEffect(() => {
+    const total = cartTotals(cart);
+
+    setCartTotal(total);
+  }, [cart]);
+
   const { data: session } = useSession();
   const stripe = useStripe();
   const elements = useElements();
-  const router = useRouter();
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -34,7 +46,7 @@ const PaymentForm: React.FC = () => {
     const res = await BrowserRest.post<StripeResponse>(
       "/payment",
       {
-        total: 200,
+        total: cartTotal | 100,
       },
       {
         headers: {
@@ -47,9 +59,7 @@ const PaymentForm: React.FC = () => {
 
     if (!elements) return;
 
-    const purchaseUrl = `${process.env.NEXT_API_URL}/carts/${session?.user?.cart}/purchase`;
-
-    console.log(purchaseUrl);
+    const purchaseUrl = `${process.env.NEXT_PUBLIC_NEXT_API_URL}/carts/${session?.user?.cart}/purchase`;
 
     const { error } = await stripe.confirmPayment({
       elements,

@@ -2,9 +2,9 @@ import { CgMenuRight } from "react-icons/cg";
 import LoginIcon from "./LoginIcon";
 import CartIcon from "../common/CartIcon";
 import AdminLink from "../common/AdminLink";
-import useIsAdmin from "@/hooks/useIsAdmin";
 import SearchBarIcon from "../common/SearchBarIcon";
 import HomeLogoIcon from "../common/HomeLogoLink";
+import useIsAdmin from "@/hooks/useIsAdmin";
 
 const Navbar = () => {
   const { isAdmin } = useIsAdmin();

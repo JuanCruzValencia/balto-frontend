@@ -34,7 +34,7 @@ const ProductDetailCard: React.FC<Props> = ({ product }) => {
           <div className="flex gap-2">
             <AddToCartButton
               pid={product._id}
-              className="text-s bg-font w-full rounded text-white p-2 uppercase shadow-xl font-bold"
+              className="text-s bg-font w-full rounded text-white p-2 uppercase shadow-xl font-bold hover:bg-footer"
             />
             <AddToFavButton />
           </div>

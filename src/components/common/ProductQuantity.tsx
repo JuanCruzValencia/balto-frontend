@@ -14,14 +14,14 @@ const ProductsQuantity: React.FC<Props> = ({ initialValue, onAdd }) => {
         <span className="font-bold uppercase">Quantity:</span>
         <button
           onClick={handleAddClick}
-          className="text-s bg-footer w-[40px] rounded text-font p-2 uppercase shadow-xl font-bold"
+          className="text-s bg-footer w-[40px] rounded text-font p-2 uppercase shadow-xl font-bold hover:bg-footer"
         >
           +
         </button>
         <span>{counter}</span>
         <button
           onClick={handleSubClick}
-          className="text-s bg-footer w-[40px] rounded text-font p-2 uppercase shadow-xl font-bold"
+          className="text-s bg-footer w-[40px] rounded text-font p-2 uppercase shadow-xl font-bold hover:bg-footer"
         >
           -
         </button>

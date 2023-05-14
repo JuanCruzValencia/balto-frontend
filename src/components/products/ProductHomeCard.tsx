@@ -27,7 +27,7 @@ const ProductHomeCard: React.FC<Props> = ({ product }) => {
         <div>
           <AddToCartButton
             pid={product._id}
-            className="capitalize border-2 border-black text-s w-[185px] h-[60px]"
+            className="capitalize border-2 border-black text-s w-[185px] h-[60px] hover:bg-font hover:text-white"
           />
         </div>
       </div>

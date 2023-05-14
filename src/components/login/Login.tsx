@@ -39,7 +39,7 @@ const LoginComponent: React.FC = () => {
         </div>
         <button
           type="submit"
-          className="text-s bg-font w-full rounded text-white p-2 uppercase shadow-xl font-bold"
+          className="text-s bg-font w-full rounded text-white p-2 uppercase shadow-xl font-bold hover:bg-footer"
         >
           log
         </button>

@@ -11,25 +11,13 @@ Visualizar productos OK
 Visualizar carrito OK
 
 Agregar productos al carrito OK
-TODO No hay mensaje de que el prodcuto fue agregado con exito FIXED
- - El toast esta en el componente pero no se esta disparando
-TODO Si agrego dos prodcutos iguales no los suma, los duplica FIXED
 
 Eliminar producto del carrito OK
 
-TODO No hay mensaje de que el producto fue eliminado
-- El toast esta en el componente pero no se esta disparando FIXED
-
 TODO No renderiza el contenedor por ende no se ve reflejado en el la UI
-- La llamada a delete llega al back y completa pero no obtengo respuesta (MIRAR BACKEND)
-- Se agrego un metoo render desde el contenedor hasta el boton delete para poder actulizar el estado y que renderize nuevamente
 
 Pagar producto redirecciona a vista de Stripe OK
 
-TODO No esta tomando la URL a la que debe redireccionar si la accion fue completada con exito
+Ver ticket de compra una vez aceptado el pago OK
 
-Ver ticket de compra una vez aceptado el pago
-
-TODO Vaciar el carrito 
-
-TODO Que envie un email con la compra que fue realizada
+TODO Que envie un email con la compra que fue realizada BACKEND

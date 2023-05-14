@@ -20,7 +20,7 @@ const PurchasePage: NextPage<PageProps> = ({ ticket }) => {
       <Head>
         <title>Balto | Purchase Detail</title>
       </Head>
-      <PurchaseDetailContainer />
+      <PurchaseDetailContainer ticket={ticket} />
     </>
   );
 };
@@ -29,14 +29,16 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
 
   if (session && session.user) {
-    const { data: ticket } = await ServerRest.get<PurchaseResponse>(
-      `/api/carts/${context.params!.cid}`,
+    const { data: ticket } = await ServerRest.post<PurchaseResponse>(
+      `/api/carts/${context.params!.cid}/purchase`,
+      {},
       {
         headers: {
           Authorization: `Bearer ${session.user.token}`,
         },
       }
     );
+
     return {
       props: {
         ticket: ticket.payload,

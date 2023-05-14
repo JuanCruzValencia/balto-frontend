@@ -4,10 +4,9 @@ import DeleteFromCartBtn from "../common/DeleteFromCartBtn";
 
 type Props = {
   product: Products;
-  render: () => void;
 };
 
-const CartCard: React.FC<Props> = ({ product, render }) => {
+const CartCard: React.FC<Props> = ({ product }) => {
   return (
     <div className="flex gap-5 bg-white items-center justify-between p-5 w-full border-b-2 border-lgrey">
       <Image
@@ -26,8 +25,7 @@ const CartCard: React.FC<Props> = ({ product, render }) => {
       <span className="font-bold">${product.product.price}</span>
       <DeleteFromCartBtn
         pid={product.product._id}
-        className="capitalize text-red font-bold"
-        render={render}
+        className="p-2 capitalize text-red font-bold border-2 border-white hover:border-red rounded"
       />
     </div>
   );

@@ -20,7 +20,7 @@ const CartOrderDetail: React.FC<Props> = ({ cart }) => {
     <div className="flex flex-col items-center p-5 w-full border-t-2 border-font">
       <span className="text-m">Total cost:</span>
       <span className="font-bold text-l mb-5">${cartTotal.toFixed(2)}</span>
-      <CheckoutBtn />
+      <CheckoutBtn cartId={cart._id} />
     </div>
   );
 };

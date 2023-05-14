@@ -15,7 +15,7 @@ const useCartTotal = () => {
     };
 
     getCart();
-  }, []);
+  }, [getCartList]);
 
   if (cart) {
     const getTotal = cart?.products
@@ -23,9 +23,6 @@ const useCartTotal = () => {
         return product.product.price * product.quantity;
       })
       .reduce((acc, curr) => acc + curr, 0);
-
-      console.log(getTotal);
-      
 
     setTotal(getTotal);
   }
