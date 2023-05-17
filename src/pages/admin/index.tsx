@@ -1,8 +1,8 @@
+import Head from "next/head";
 import { User } from "@/interfaces";
 import { ServerRest } from "@/utils/backend/server-rest";
 import { GetServerSideProps, NextPage } from "next";
 import { getServerSession } from "next-auth";
-import Head from "next/head";
 import { authOptions } from "../api/auth/[...nextauth]";
 import AdminContainer from "@/components/admin/AdminContainer";
 
