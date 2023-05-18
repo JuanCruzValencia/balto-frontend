@@ -35,6 +35,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       headers: { Authorization: `Bearer ${session.user.token}` },
     });
 
+    // if(!data){
+    //   return {
+    //     redirect: {
+    //       destination: ""
+    //     }
+    //   }
+    // }
+
     return {
       props: {
         users: data.payload,

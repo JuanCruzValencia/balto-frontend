@@ -1,7 +1,12 @@
 export { default as AddToCartButton } from './AddToCartButton';
 export { default as AddToFavButton } from './AddToFavButton';
+export { default as AdminLink } from './AdminLink';
 export { default as CartIcon } from './CartIcon';
 export { default as CheckoutBtn } from './CheckoutBtn';
+export { default as DeleteFromCartBtn } from './DeleteFromCartBtn';
+export { default as DeleteUserBtn } from './DeleteUserBtn';
+export { default as HomeLogoLink } from './HomeLogoLink';
 export { default as LogoIcon } from './LogoIcon';
 export { default as ProductQuantity } from './ProductQuantity';
 export { default as RatingComponent } from './RatingComponent';
+export { default as SearchBarIcon } from './SearchBarIcon';
