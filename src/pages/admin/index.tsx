@@ -30,25 +30,27 @@ const AdminPage: NextPage<PageProps> = ({ users }) => {
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const session = await getServerSession(context.req, context.res, authOptions);
 
-  if (session && session.user) {
-    const { data } = await ServerRest.get<ResponsePayload>("/api/users", {
-      headers: { Authorization: `Bearer ${session.user.token}` },
-    });
+  try {
+    if (session && session.user) {
+      const response = await ServerRest.get<ResponsePayload>("/api/users", {
+        headers: { Authorization: `Bearer ${session.user.token}` },
+      });
 
-    // if(!data){
-    //   return {
-    //     redirect: {
-    //       destination: ""
-    //     }
-    //   }
-    // }
-
+      return {
+        props: {
+          users: response.data.payload,
+        },
+      };
+    }
+  } catch (error) {
     return {
-      props: {
-        users: data.payload,
+      redirect: {
+        destination: "/error",
+        permanent: false,
       },
     };
   }
+
   return {
     redirect: {
       destination: "/",
