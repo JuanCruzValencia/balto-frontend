@@ -3,8 +3,8 @@ import { User } from "@/interfaces";
 import { ServerRest } from "@/utils/backend/server-rest";
 import { GetServerSideProps, NextPage } from "next";
 import { getServerSession } from "next-auth";
-import { authOptions } from "../api/auth/[...nextauth]";
 import AdminContainer from "@/components/admin/AdminContainer";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 interface PageProps {
   users: User[];
