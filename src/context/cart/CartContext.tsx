@@ -14,15 +14,15 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
   const userCartId = session?.user?.cart;
   const token = session?.user?.token;
 
-  const getCartList = async () => {
-    const response = await BrowserRest.get(`/carts/${userCartId}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  // const getCartList = async () => {
+  //   const response = await BrowserRest.get(`/carts/${userCartId}`, {
+  //     headers: {
+  //       Authorization: `Bearer ${token}`,
+  //     },
+  //   });
 
-    return response.data.payload;
-  };
+  //   return response.data.payload;
+  // };
 
   const addToCart = async (pid: Product["_id"]) => {
     const response = await BrowserRest.post(
@@ -92,7 +92,6 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
   };
 
   const data = {
-    getCartList,
     addToCart,
     deleteItem,
     getTicket,

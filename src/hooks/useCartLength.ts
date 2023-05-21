@@ -1,25 +1,28 @@
-import { CartContext } from "@/context/cart/CartContext";
-import { CartContextProps } from "@/interfaces";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { BrowserRest } from "@/utils/frontend/browser-rest";
 
 const useCartLength = () => {
   const [totalCart, setTotalCart] = useState<number>(0);
-  const { getCartList } = useContext(CartContext) as CartContextProps;
   const { data: session } = useSession();
 
   useEffect(() => {
-    async function responseCart() {
+    const fetchCart = async () => {
       if (session) {
-        const cartResponse = await getCartList();
+        const response = await BrowserRest.get(`/carts/${session.user?.cart}`, {
+          headers: {
+            Authorization: `Bearer ${session.user?.token}`,
+          },
+        });
 
-        const cartLength = cartResponse.products.length;
+        const cartLength = response.data.payload.products.length;
 
         setTotalCart(cartLength);
       }
-    }
-    responseCart();
-  }, [session, getCartList]);
+    };
+
+    fetchCart();
+  });
 
   return { totalCart };
 };
