@@ -18,10 +18,21 @@ const AddToCartButton: React.FC<Props> = ({ pid, className }) => {
     });
   };
 
-  const handleClick = async (pid: Product["_id"]) => {
-    const response = await addToCart(pid);
+  const notifyError = () => {
+    toast.error("Usted ya posee este producto!", {
+      position: toast.POSITION.TOP_CENTER,
+    });
+  };
 
-    if (response.status === RESPONSE_STATUS.SUCCESS) notify();
+  const handleClick = async (pid: Product["_id"]) => {
+    try {
+      const response = await addToCart(pid);
+
+      if (response.status === RESPONSE_STATUS.SUCCESS) notify();
+    } catch (error: any) {
+      if (error.response && error.response.status === RESPONSE_STATUS.AUTH)
+        notifyError();
+    }
   };
 
   return (

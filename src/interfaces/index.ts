@@ -91,6 +91,7 @@ export interface Ticket {
 export enum RESPONSE_STATUS {
   SUCCESS = 200,
   ERROR = 400,
+  AUTH = 403,
 }
 
 export enum STRIPE_STATUS {
