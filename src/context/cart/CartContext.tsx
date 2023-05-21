@@ -1,6 +1,6 @@
 import { CartContextProps, Product } from "@/interfaces";
 import { BrowserRest } from "@/utils/frontend/browser-rest";
-import { createContext } from "react";
+import { createContext, useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
 
 export const CartContext = createContext<CartContextProps | {}>({});
@@ -11,31 +11,44 @@ type Props = {
 
 export const CartProvider: React.FC<Props> = ({ children }) => {
   const { data: session } = useSession();
+  const [cartCount, setCartCount] = useState<number>(0);
   const userCartId = session?.user?.cart;
   const token = session?.user?.token;
 
-  // const getCartList = async () => {
-  //   const response = await BrowserRest.get(`/carts/${userCartId}`, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   });
-
-  //   return response.data.payload;
-  // };
-
-  const addToCart = async (pid: Product["_id"]) => {
-    const response = await BrowserRest.post(
-      `/carts/${userCartId}/product/${pid}`,
-      {},
-      {
+  useEffect(() => {
+    const fetchCart = async () => {
+      const response = await BrowserRest.get(`/carts/${userCartId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
-      }
-    );
+      });
 
-    return response;
+      const cart = response.data.payload.products;
+
+      setCartCount(cart.length);
+    };
+
+    fetchCart();
+  }, [userCartId, token, setCartCount]);
+
+  const addToCart = async (pid: Product["_id"]) => {
+    try {
+      const response = await BrowserRest.post(
+        `/carts/${userCartId}/product/${pid}`,
+        {},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setCartCount(cartCount + 1);
+
+      return response;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const deleteItem = async (pid: Product["_id"]) => {
@@ -47,6 +60,8 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
         },
       }
     );
+
+    setCartCount(cartCount - 1);
 
     return response;
   };
@@ -92,6 +107,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
   };
 
   const data = {
+    cartCount,
     addToCart,
     deleteItem,
     getTicket,

@@ -9,7 +9,7 @@ const LoginIcon = () => {
     return (
       <>
         <button
-          className="capitalize flex items-center gap-2 text-green"
+          className="capitalize flex items-center gap-2 text-red"
           onClick={() => signOut()}
         >
           <BiUser /> log out

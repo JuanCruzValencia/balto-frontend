@@ -43,6 +43,7 @@ export interface Products {
 }
 
 export interface CartContextProps {
+  cartCount: number;
   addToCart: (pid: Product["_id"]) => AxiosResponse;
   deleteItem: (pid: Product["_id"]) => AxiosResponse;
   purchaseCart: () => void;

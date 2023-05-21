@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { BsBag } from "react-icons/bs";
 import { useSession } from "next-auth/react";
-import { useCartLength } from "@/hooks";
+import { useContext } from "react";
+import { CartContext } from "@/context/cart/CartContext";
+import { CartContextProps } from "@/interfaces";
 
 const CartIcon: React.FC = () => {
   const { data: session } = useSession();
-  const { totalCart } = useCartLength();
+  const { cartCount } = useContext(CartContext) as CartContextProps;
 
   if (session) {
     return (
@@ -14,7 +16,7 @@ const CartIcon: React.FC = () => {
           <BsBag />
         </Link>
         <div className="absolute left-2 w-5 h-5 bg-black text-white rounded-full text-center text-xs">
-          {totalCart}
+          {cartCount}
         </div>
       </div>
     );
