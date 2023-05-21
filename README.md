@@ -1,6 +1,6 @@
 # Balto's Shop - E-commerce React App.
 
-Link to live version - [Balto's Shop]()
+Link to live version - [Balto's Shop](https://balto-frontend.vercel.app/)
 
 Balto's Shop is the frontend for my final project in Coderhouse Backend couse. An REST-API e-commerce application that allows users to register/login, search for products stored in MongoDB databse, add them to shopping cart and then make payment with Stripe API. 
 
