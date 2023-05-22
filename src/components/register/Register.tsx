@@ -3,7 +3,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { BrowserRest } from "@/utils/frontend/browser-rest";
 import { useRouter } from "next/router";
 import { RegisterInputsTypes } from "@/interfaces";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const RegisterComponent = () => {
@@ -97,7 +97,6 @@ const RegisterComponent = () => {
           </span>
         </div>
       </div>
-      <ToastContainer />
     </>
   );
 };

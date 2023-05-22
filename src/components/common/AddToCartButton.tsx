@@ -1,6 +1,6 @@
 import { CartContext } from "@/context/cart/CartContext";
 import { CartContextProps, Product, RESPONSE_STATUS } from "@/interfaces";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { useContext } from "react";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -40,7 +40,6 @@ const AddToCartButton: React.FC<Props> = ({ pid, className }) => {
       <button onClick={() => handleClick(pid)} className={className}>
         add to cart
       </button>
-      <ToastContainer />
     </>
   );
 };
