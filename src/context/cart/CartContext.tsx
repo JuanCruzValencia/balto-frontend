@@ -16,20 +16,22 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
   const token = session?.user?.token;
 
   useEffect(() => {
-    const fetchCart = async () => {
-      const response = await BrowserRest.get(`/carts/${userCartId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    if (session && session.user?.cart) {
+      const fetchCart = async () => {
+        const response = await BrowserRest.get(`/carts/${session.user?.cart}`, {
+          headers: {
+            Authorization: `Bearer ${session.user?.token}`,
+          },
+        });
 
-      const cart = response.data.payload.products;
+        const cart = response.data.payload.products;
 
-      setCartCount(cart.length);
-    };
+        setCartCount(cart.length);
+      };
 
-    fetchCart();
-  }, [userCartId, token, setCartCount]);
+      fetchCart();
+    }
+  }, [session, setCartCount]);
 
   const addToCart = async (pid: Product["_id"]) => {
     try {
